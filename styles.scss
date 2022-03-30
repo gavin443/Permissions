@@ -1,0 +1,319 @@
+@import url("modal.css");
+
+$base-color: #212529;
+$draggable-color: #eeeeee;
+$pill-holder: #fee2e2;
+$checked-pill: #7986cb;
+$unchecked-pill: #991b1b;
+$btn-action: #38ab63;
+$pill-remove: #ec484e;
+
+//body not needed
+body {
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $base-color;
+}
+
+#CopyJson {
+  cursor: pointer;
+}
+
+i.fa {
+  font-size: 14px;
+}
+
+.pill-holder i.fa {
+  margin-left: 8px;
+  color: $pill-remove;
+}
+
+.line-text i.fa {
+  color: $pill-remove;
+}
+
+.json-result {
+  font-weight: 600;
+  margin-top: 40px;
+  width: 100%;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.permission-drag-container {
+  padding: 1rem;
+  margin-top: 1rem;
+
+  .draggable {
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid black;
+  }
+
+  .draggable.dragging {
+    opacity: 0.7;
+    background: $draggable-color;
+    z-index: 100;
+    .new-group {
+      background-color: $draggable-color;
+    }
+  }
+
+  .draggable.dragging .line-text {
+    border-bottom: 1px solid lighten($draggable-color, 4%);
+    .block-spacer {
+      background-color: #eeeeee;
+    }
+  }
+
+  .flex-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /*pill stuff*/
+
+  ul.role-options {
+    list-style: none;
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0px;
+  }
+
+  ul.role-options li:not(.or-operator) {
+    color: $unchecked-pill;
+    font-weight: 500;
+    //line-height: 30px;
+    display: flex;
+    font-weight: 600;
+    align-self: center;
+  }
+
+  i.fa-grip-vertical {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #525558;
+    margin-bottom: 5px;
+    cursor: move;
+  }
+
+  ul.role-options li i {
+    cursor: pointer;
+  }
+
+  .pill-holder {
+    border-radius: 100px;
+    background-color: $pill-holder;
+    align-items: center;
+    padding: 4px 10px;
+    margin: 5px;
+  }
+
+  .flex-row {
+    flex-direction: row !important;
+    align-items: center;
+  }
+  .d-flex {
+    display: flex !important;
+  }
+
+  .k-grid-content {
+    max-height: 450px !important;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+  }
+
+  .shadow {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+  }
+
+  .permissions-container {
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+
+    //toggle pill
+    $night: #991b1b;
+    $midnight: #2c3e50;
+    $transition: all 0.5s ease;
+    /* Hide the input */
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+    .check-trail {
+      display: flex;
+      align-items: center;
+      width: 110px;
+      line-height: 25px;
+      border: 1px solid #e0e0e0;
+      border-radius: 2.5em;
+      transition: $transition;
+      cursor: pointer;
+    }
+    .check-handler {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      height: 30px;
+      background: $unchecked-pill;
+      border-radius: 2.5em;
+      transition: $transition;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      &:before {
+        content: "Deny";
+        color: white;
+      }
+    }
+
+    input[type="checkbox"]:checked + .check-trail {
+      .check-handler {
+        margin-left: 50%;
+        background: $checked-pill;
+        &::before {
+          content: "Allow";
+        }
+      }
+    }
+  }
+
+  .btn-danger {
+    background: $pill-holder;
+    border: none;
+    color: $unchecked-pill;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-circle:not(.btn-success-add) {
+    background-color: $pill-holder;
+  }
+
+  .btn-success-add {
+    background: $checked-pill;
+    border: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    i:not(.fa-times) {
+      color: #fff;
+    }
+  }
+
+  .btn-success-add:hover {
+    background-color: darken($checked-pill, 10%);
+  }
+
+  .btn-success-add:active {
+    background-color: darken($checked-pill, 10%);
+  }
+
+  .container-flex {
+    justify-content: space-between;
+  }
+
+  .btn-circle.btn-sm {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bi-x {
+    color: lighten($unchecked-pill, 15%);
+    font-size: 20px;
+  }
+
+  .line-text {
+    border-bottom: 1px solid #eeeeee;
+    margin: 30px 0 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .block-spacer {
+    background-color: #fff;
+    padding: 0px 10px;
+  }
+
+  .line-text div {
+    //background: #fff;
+    //padding: 0 4px;
+    //font-weight: 600;
+    color: $unchecked-pill;
+    margin-bottom: -8px;
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .line-text.no-margin {
+    margin-right: -30px;
+    margin-left: -30px;
+  }
+
+  .or-operator {
+    align-self: center;
+    color: #b2b2b2;
+  }
+}
+
+button#SavePermissions {
+  background-color: $btn-action;
+  border-color: $btn-action;
+  margin-left: 10px;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none;
+}
+
+.btn-outline-secondary {
+  background-color: #fff;
+  border: 1px solid lightgray;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #ccc;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+table.dataTable thead tr {
+  color: #666;
+}
+
+div#roles-datatable_filter {
+  color: #333;
+  margin-bottom: 10px;
+}
