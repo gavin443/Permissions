@@ -218,9 +218,9 @@ function attachDynamicRoleListners() {
       let nextElement = e.target.parentElement.nextElementSibling;
       console.log(e.target.parentElement.previousElementSibling);
       e.target.parentElement.remove();
-      if (prevElement && prevElement.classList.contains("or-operator")) {
+      if (prevElement?.classList.contains("or-operator")) {
         prevElement.remove();
-      } else if (nextElement && nextElement.classList.contains("or-operator")) {
+      } else if (nextElement?.classList.contains("or-operator")) {
         nextElement.remove();
       }
     });
