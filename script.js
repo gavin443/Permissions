@@ -1,4 +1,4 @@
-import { addGlobalEventListener, createElement, qs, qsa } from "./util.js";
+//import { addGlobalEventListener, createElement, qs, qsa } from "./util.js";
 
 let PermissionSetList = [];
 let CheckCounter = 0;
@@ -30,6 +30,8 @@ const jsonResult = document.getElementById("json-result");
 const dialogOK = document
   .getElementById("SaveRoles")
   .addEventListener("click", (e) => {
+    //clear filter
+    table.search("").draw();
     setSelectedRoles();
     modal.classList.replace("show-modal", "hide-modal");
   });
@@ -42,13 +44,15 @@ const saveOK = document
 
 span.onclick = function () {
   modal.classList.replace("show-modal", "hide-modal");
+  table.search("").draw();
 };
 
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.classList.replace("show-modal", "hide-modal");
-  }
-};
+//comment shortcut CTRL + /
+// window.onclick = function (event) {
+//   if (event.target == modal) {
+//     modal.classList.replace("show-modal", "hide-modal");
+//   }
+// };
 
 //loop through each permission on save event
 function savePermissions() {
@@ -166,16 +170,15 @@ function setSelectedRoles() {
 
   let selected = ActiveRow.target.closest(".flex-row");
   selected.querySelector(".role-options").classList.add("active");
-  //needs adding elsewhere
+
   let selectedElements = document.querySelectorAll(
     "#roles-datatable input[type='checkbox']:checked"
   );
 
   for (let i = 0; i < selectedElements.length; i++) {
     if (
-      selected.querySelectorAll(
-        "[data-role='" + selectedElements[i].value + "']"
-      ).length == 0
+      selected.querySelectorAll("[data-role='" + selectedElements[i].id + "']")
+        .length == 0
     ) {
       let li = document.createElement("li");
       let list = selected.querySelector(".role-options.active");
