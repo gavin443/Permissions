@@ -8,6 +8,15 @@ $unchecked-pill: #991b1b;
 $btn-action: #38ab63;
 $pill-remove: #ec484e;
 
+.btn-delete-confirm {
+  background-color: $unchecked-pill;
+  color: #fff;
+  &:hover {
+    background-color: $unchecked-pill;
+    color: #fff;
+  }
+}
+
 //body not needed
 body {
   margin: 0;
@@ -15,6 +24,41 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: $base-color;
+}
+
+.popover {
+  max-width: 430px;
+}
+
+.popover-content {
+  padding: 14px 14px;
+}
+
+#delete-confirm-btn {
+  display: none;
+}
+
+.popover-header {
+  display: grid;
+  grid-template-columns: 20px auto;
+  gap: 15px;
+  align-items: start;
+  .popover-icon {
+    background: $pill-holder;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: $unchecked-pill;
+    .popover-message {
+      grid-column-start: 2;
+    }
+  }
 }
 
 #CopyJson {
@@ -72,8 +116,6 @@ i.fa {
     justify-content: space-between;
   }
 
-  /*pill stuff*/
-
   ul.role-options {
     list-style: none;
     margin: 0px;
@@ -85,7 +127,6 @@ i.fa {
   ul.role-options li:not(.or-operator) {
     color: $unchecked-pill;
     font-weight: 500;
-    //line-height: 30px;
     display: flex;
     font-weight: 600;
     align-self: center;
@@ -143,12 +184,7 @@ i.fa {
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 25px;
-
-    //toggle pill
-    $night: #991b1b;
-    $midnight: #2c3e50;
     $transition: all 0.5s ease;
-    /* Hide the input */
     input[type="checkbox"] {
       position: absolute;
       opacity: 0;
@@ -252,9 +288,6 @@ i.fa {
   }
 
   .line-text div {
-    //background: #fff;
-    //padding: 0 4px;
-    //font-weight: 600;
     color: $unchecked-pill;
     margin-bottom: -8px;
     i {

@@ -3,6 +3,27 @@
 let PermissionSetList = [];
 let CheckCounter = 0;
 let ActiveRow;
+let ActiveCard;
+
+var popOverSettings = {
+  placement: "top",
+  container: "body",
+  trigger: "focus",
+  html: true,
+  selector: ".delete-card",
+  content: function () {
+    return $("#delete-confirm-btn").html();
+  },
+};
+
+$("#widget").popover(popOverSettings);
+$("#widget").on("show.bs.popover", function (e) {
+  ActiveCard = e.target;
+});
+
+function deleteActiveCard() {
+  ActiveCard.closest(".permissions-container").remove();
+}
 
 const copyJson = document
   .getElementById("CopyJson")
@@ -47,14 +68,6 @@ span.onclick = function () {
   table.search("").draw();
 };
 
-//comment shortcut CTRL + /
-// window.onclick = function (event) {
-//   if (event.target == modal) {
-//     modal.classList.replace("show-modal", "hide-modal");
-//   }
-// };
-
-//loop through each permission on save event
 function savePermissions() {
   PermissionSetList = [];
   const setlists = document.querySelectorAll(".permissions-container");
@@ -62,7 +75,7 @@ function savePermissions() {
   setlists.forEach((setlist) => {
     let RoleList = [];
 
-    roleGroups = setlist.querySelectorAll(
+    let roleGroups = setlist.querySelectorAll(
       ".roles-group, .and-group .d-flex.flex-row"
     );
 
@@ -92,19 +105,6 @@ attachDynamicGroupListners();
 
 document.getElementById("new-permission").addEventListener("click", (e) => {
   //create div first so we can easilty access dom elements only inside the created div
-  // let elem = createElement("div", {
-  //   class: [
-  //     "draggable",
-  //     "flex-content",
-  //     "card",
-  //     "shadow",
-  //     "permissions-container",
-  //   ],
-  //   "data-draggable": "true",
-  //   draggable: "true",
-  // });
-
-  // //console.log(elem);
 
   let elem = document.createElement("div");
   elem.classList.add(
@@ -140,13 +140,6 @@ function attachDynamicPermissions() {
       target.querySelector(".and-group").append(tmpl2.content.cloneNode(true));
       attachDynamicRoleListners();
       attachDynamicGroupListners();
-    });
-  });
-
-  deleteButtons.forEach((deleteButton) => {
-    deleteButton.setAttribute("data-deletecard", "true");
-    deleteButton.addEventListener("click", (e) => {
-      e.target.closest(".permissions-container").remove();
     });
   });
 
