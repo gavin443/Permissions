@@ -27,10 +27,10 @@
   </head>
   <body>
     <div id="widget">
-      <div id="delete-confirm-btn">
+      <template id="delete-confirm-btn">
         <div class="popover-header">
           <div class="popover-icon">
-            <i class="fa-solid fa-triangle-exclamation"></i>
+            <i class="fas fa-triangle-exclamation"></i>
           </div>
           <span><b>Are you Sure?</b></span>
           <p class="popover-message" style="grid-column-start: 2">
@@ -39,13 +39,13 @@
           </p>
         </div>
 
-        <div style="text-align: right">
+        <div class="popover-footer">
           <button class="btn btn-outline-secondary">Cancel</button>
           <button class="btn btn-delete-confirm" onclick="deleteActiveCard()">
             Delete
           </button>
         </div>
-      </div>
+      </template>
 
       <template id="tmpl1">
         <div class="container-flex d-flex flex-row">
@@ -348,6 +348,17 @@
           paging: false,
           ordering: false,
           info: false,
+        });
+
+        $("#widget").popover({
+          placement: "top",
+          container: "#widget",
+          trigger: "focus",
+          html: true,
+          selector: ".delete-card",
+          content: function () {
+            return $("#delete-confirm-btn").html();
+          },
         });
       });
     </script>

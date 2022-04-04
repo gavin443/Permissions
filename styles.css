@@ -16,15 +16,13 @@ body {
   color: #212529;
 }
 
-.popover {
+#widget .popover {
   max-width: 430px;
 }
-
-.popover-content {
+#widget .popover-content {
   padding: 14px 14px;
 }
-
-#delete-confirm-btn {
+#widget #delete-confirm-btn {
   display: none;
 }
 
@@ -49,6 +47,10 @@ body {
 }
 .popover-header .popover-icon .popover-message {
   grid-column-start: 2;
+}
+
+.popover-footer {
+  text-align: right;
 }
 
 #CopyJson {

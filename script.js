@@ -5,26 +5,6 @@ let CheckCounter = 0;
 let ActiveRow;
 let ActiveCard;
 
-var popOverSettings = {
-  placement: "top",
-  container: "body",
-  trigger: "focus",
-  html: true,
-  selector: ".delete-card",
-  content: function () {
-    return $("#delete-confirm-btn").html();
-  },
-};
-
-$("#widget").popover(popOverSettings);
-$("#widget").on("show.bs.popover", function (e) {
-  ActiveCard = e.target;
-});
-
-function deleteActiveCard() {
-  ActiveCard.closest(".permissions-container").remove();
-}
-
 const copyJson = document
   .getElementById("CopyJson")
   .addEventListener("click", () => {
@@ -67,6 +47,14 @@ span.onclick = function () {
   modal.classList.replace("show-modal", "hide-modal");
   table.search("").draw();
 };
+
+$("#widget").on("show.bs.popover", function (e) {
+  ActiveCard = e.target;
+});
+
+function deleteActiveCard() {
+  ActiveCard.closest(".permissions-container").remove();
+}
 
 function savePermissions() {
   PermissionSetList = [];
@@ -116,7 +104,6 @@ document.getElementById("new-permission").addEventListener("click", (e) => {
   );
   elem.setAttribute("draggable", "true");
   elem.setAttribute("data-draggable", "false");
-  console.log(elem);
   elem.append(tmpl1.content.cloneNode(true));
   elem.querySelector(".permissions-container input[type='checkbox']").id =
     "chck" + CheckCounter;
