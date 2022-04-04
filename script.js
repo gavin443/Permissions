@@ -5,6 +5,7 @@ let CheckCounter = 0;
 let ActiveRow;
 let ActiveCard;
 
+const dialog = document.getElementById("permission-dialog");
 const copyJson = document
   .getElementById("CopyJson")
   .addEventListener("click", () => {
@@ -26,6 +27,7 @@ containers.forEach((container) => {
 });
 
 const span = document.getElementsByClassName("modal-close")[0];
+const pmodal = document.getElementById("dialog-modal");
 const modal = document.getElementById("roles-modal");
 const jsonResult = document.getElementById("json-result");
 const dialogOK = document
@@ -48,13 +50,19 @@ span.onclick = function () {
   table.search("").draw();
 };
 
-$("#widget").on("show.bs.popover", function (e) {
-  ActiveCard = e.target;
-});
+document.getElementById("hide").onclick = function () {
+  pmodal.classList.replace("show-modal", "hide-modal");
+};
 
-function deleteActiveCard() {
+document.getElementById("delete-card").onclick = function () {
   ActiveCard.closest(".permissions-container").remove();
-}
+  pmodal.classList.replace("show-modal", "hide-modal");
+};
+
+$("body").on("click", ".delete-card", function (e) {
+  ActiveCard = e.target;
+  pmodal.classList.replace("hide-modal", "show-modal");
+});
 
 function savePermissions() {
   PermissionSetList = [];

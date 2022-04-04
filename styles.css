@@ -8,6 +8,14 @@
   color: #fff;
 }
 
+#permission-dialog {
+  z-index: 99;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  margin-top: 60px;
+  padding: 20px;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
@@ -16,23 +24,13 @@ body {
   color: #212529;
 }
 
-#widget .popover {
-  max-width: 430px;
-}
-#widget .popover-content {
-  padding: 14px 14px;
-}
-#widget #delete-confirm-btn {
-  display: none;
-}
-
-.popover-header {
+.dialog-header {
   display: grid;
   grid-template-columns: 20px auto;
   gap: 15px;
   align-items: start;
 }
-.popover-header .popover-icon {
+.dialog-header .dialog-icon {
   background: #fee2e2;
   border-radius: 50%;
   width: 25px;
@@ -45,12 +43,14 @@ body {
   font-size: 14px;
   color: #991b1b;
 }
-.popover-header .popover-icon .popover-message {
+
+.dialog-message {
   grid-column-start: 2;
 }
 
-.popover-footer {
+.dialog-footer {
   text-align: right;
+  grid-column-start: 2;
 }
 
 #CopyJson {

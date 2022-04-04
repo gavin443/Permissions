@@ -28,6 +28,9 @@
   border: 1px solid #888;
   width: 50%;
 }
+.modal .modal-content.dialog-header {
+  width: 30%;
+}
 .modal .modal-close {
   color: #4d4d4d;
   float: right;

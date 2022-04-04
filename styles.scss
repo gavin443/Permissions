@@ -17,6 +17,14 @@ $pill-remove: #ec484e;
   }
 }
 
+#permission-dialog {
+  z-index: 99;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+  margin-top: 60px;
+  padding: 20px;
+}
+
 //body not needed
 body {
   margin: 0;
@@ -26,26 +34,12 @@ body {
   color: $base-color;
 }
 
-#widget {
-  .popover {
-    max-width: 430px;
-  }
-
-  .popover-content {
-    padding: 14px 14px;
-  }
-
-  #delete-confirm-btn {
-    display: none;
-  }
-}
-
-.popover-header {
+.dialog-header {
   display: grid;
   grid-template-columns: 20px auto;
   gap: 15px;
   align-items: start;
-  .popover-icon {
+  .dialog-icon {
     background: $pill-holder;
     border-radius: 50%;
     width: 25px;
@@ -57,14 +51,16 @@ body {
     justify-content: center;
     font-size: 14px;
     color: $unchecked-pill;
-    .popover-message {
-      grid-column-start: 2;
-    }
   }
 }
 
-.popover-footer {
+.dialog-message {
+  grid-column-start: 2;
+}
+
+.dialog-footer {
   text-align: right;
+  grid-column-start: 2;
 }
 
 #CopyJson {
