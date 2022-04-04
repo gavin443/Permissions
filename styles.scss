@@ -98,6 +98,7 @@ i.fa {
   .draggable.dragging {
     opacity: 0.7;
     background: $draggable-color;
+    border:2px dotted #666;
     z-index: 100;
     .new-group {
       background-color: $draggable-color;
