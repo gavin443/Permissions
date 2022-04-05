@@ -90,6 +90,7 @@ i.fa {
   opacity: 0.7;
   background: #eeeeee;
   z-index: 100;
+  border: 2px dotted #666;
 }
 .permission-drag-container .draggable.dragging .new-group {
   background-color: #eeeeee;
