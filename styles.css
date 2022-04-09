@@ -6,18 +6,14 @@
 
 .fa-chevron-down {
   margin-left: 5px;
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+  cursor: pointer;
 }
 
 i.flip {
   transform: rotate(180deg);
   transition: transform 0.2s linear;
-  cursor: pointer;
-}
-
-i:not(.flip) {
-  transform: rotate(0deg);
-  transition: transform 0.2s linear;
-  cursor: pointer;
 }
 
 .btn-delete-confirm {
