@@ -1,4 +1,25 @@
 @import url("modal.css");
+.permission-collapse {
+  overflow: hidden;
+  height: 100px;
+}
+
+.fa-chevron-down {
+  margin-left: 5px;
+}
+
+i.flip {
+  transform: rotate(180deg);
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
+i:not(.flip) {
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
 .btn-delete-confirm {
   background-color: #991b1b;
   color: #fff;
@@ -89,8 +110,8 @@ i.fa {
 .permission-drag-container .draggable.dragging {
   opacity: 0.7;
   background: #eeeeee;
-  z-index: 100;
   border: 2px dotted #666;
+  z-index: 100;
 }
 .permission-drag-container .draggable.dragging .new-group {
   background-color: #eeeeee;

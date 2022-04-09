@@ -8,6 +8,27 @@ $unchecked-pill: #991b1b;
 $btn-action: #38ab63;
 $pill-remove: #ec484e;
 
+.permission-collapse {
+  overflow: hidden;
+  height: 100px;
+}
+
+.fa-chevron-down {
+  margin-left: 5px;
+}
+
+i.flip {
+  transform: rotate(180deg);
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
+i:not(.flip) {
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
 .btn-delete-confirm {
   background-color: $unchecked-pill;
   color: #fff;

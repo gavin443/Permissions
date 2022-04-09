@@ -64,6 +64,14 @@ $("body").on("click", ".delete-card", function (e) {
   pmodal.classList.replace("hide-modal", "show-modal");
 });
 
+$("body").on("click", ".fa-chevron-down", function (e) {
+  e.target.classList.toggle("flip");
+  e.target
+    .closest(".permissions-container")
+    .classList.toggle("permission-collapse");
+  //pmodal.classList.replace("hide-modal", "show-modal");
+});
+
 function savePermissions() {
   PermissionSetList = [];
   const setlists = document.querySelectorAll(".permissions-container");
