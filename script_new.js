@@ -59,6 +59,29 @@ document.getElementById("delete-card").onclick = function () {
   pmodal.classList.replace("show-modal", "hide-modal");
 };
 
+document.getElementById("new-permission").addEventListener("click", (e) => {
+  //create div first so we can easilty access dom elements only inside the created div
+
+  let elem = document.createElement("div");
+  elem.classList.add(
+    "draggable",
+    "flex-content",
+    "card",
+    "shadow",
+    "permissions-container"
+  );
+  elem.setAttribute("draggable", "true");
+  elem.setAttribute("data-draggable", "");
+  elem.append(tmpl1.content.cloneNode(true));
+  elem.querySelector(".permissions-container input[type='checkbox']").id =
+    "chck" + CheckCounter;
+  elem.querySelector(".check-trail").setAttribute("for", "chck" + CheckCounter);
+  CheckCounter++;
+  document.querySelector(".permission-drag-container").append(elem);
+});
+
+attachDynamicPermissions();
+
 function savePermissions() {
   PermissionSetList = [];
   const setlists = document.querySelectorAll(".permissions-container");
@@ -89,29 +112,6 @@ function savePermissions() {
   if (PermissionSetList.length > 0)
     jsonResult.innerHTML = JSON.stringify(PermissionSetList);
 }
-
-attachDynamicPermissions();
-
-document.getElementById("new-permission").addEventListener("click", (e) => {
-  //create div first so we can easilty access dom elements only inside the created div
-
-  let elem = document.createElement("div");
-  elem.classList.add(
-    "draggable",
-    "flex-content",
-    "card",
-    "shadow",
-    "permissions-container"
-  );
-  elem.setAttribute("draggable", "true");
-  elem.setAttribute("data-draggable", "");
-  elem.append(tmpl1.content.cloneNode(true));
-  elem.querySelector(".permissions-container input[type='checkbox']").id =
-    "chck" + CheckCounter;
-  elem.querySelector(".check-trail").setAttribute("for", "chck" + CheckCounter);
-  CheckCounter++;
-  document.querySelector(".permission-drag-container").append(elem);
-});
 
 function attachDynamicPermissions() {
   $("body").on("click", ".delete-card", function (e) {
