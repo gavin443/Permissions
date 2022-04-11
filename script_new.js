@@ -71,7 +71,7 @@ document.getElementById("new-permission").addEventListener("click", (e) => {
     "permissions-container"
   );
   elem.setAttribute("draggable", "true");
-  elem.setAttribute("data-draggable", "");
+  elem.setAttribute("data-setaction", "draggable");
   elem.append(tmpl1.content.cloneNode(true));
   elem.querySelector(".permissions-container input[type='checkbox']").id =
     "chck" + CheckCounter;
@@ -114,57 +114,61 @@ function savePermissions() {
 }
 
 function attachDynamicPermissions() {
-  $("body").on("click", ".delete-card", function (e) {
-    ActiveCard = e.target;
-    pmodal.classList.replace("hide-modal", "show-modal");
-  });
+  document.querySelector("body").addEventListener("click", function (e) {
+    switch (e.target.dataset.setaction) {
+      case "addrole":
+        ActiveRow = e;
+        document
+          .querySelectorAll("#roles-datatable input[type='checkbox']")
+          .forEach((x) => {
+            x.checked = false;
+          });
+        modal.classList.replace("hide-modal", "show-modal");
+        break;
+      case "removegroup":
+        let selectedElement = e.target.closest(".line-text");
+        let nextElement = selectedElement.nextElementSibling;
 
-  $("body").on("click", ".fa-chevron-down", function (e) {
-    e.target.classList.toggle("flip");
-    e.target
-      .closest(".permissions-container")
-      .classList.toggle("permission-collapse");
-  });
-
-  $("body").on("dragstart", "[data-draggable]", function (e) {
-    e.target.classList.add("dragging");
-  });
-
-  $("body").on("dragend", "[data-draggable]", function (e) {
-    e.target.classList.remove("dragging");
-  });
-
-  $("body").on("click", "[data-newgroup]", function (e) {
-    let target = e.target.closest(".permissions-container");
-    target.querySelector(".and-group").append(tmpl2.content.cloneNode(true));
-  });
-
-  $("body").on("click", "[data-deleterole]", function (e) {
-    let prevElement = e.target.parentElement.previousElementSibling;
-    let nextElement = e.target.parentElement.nextElementSibling;
-    e.target.parentElement.remove();
-    if (prevElement?.classList.contains("or-operator")) {
-      prevElement.remove();
-    } else if (nextElement?.classList.contains("or-operator")) {
-      nextElement.remove();
+        selectedElement.remove();
+        nextElement.remove();
+        break;
+      case "newgroup":
+        let target = e.target.closest(".permissions-container");
+        target
+          .querySelector(".and-group")
+          .append(tmpl2.content.cloneNode(true));
+        break;
+      case "deleterole":
+        let prevElement = e.target.parentElement.previousElementSibling;
+        let nextSibling = e.target.parentElement.nextElementSibling;
+        e.target.parentElement.remove();
+        if (prevElement?.classList.contains("or-operator")) {
+          prevElement.remove();
+        } else if (nextSibling?.classList.contains("or-operator")) {
+          nextSibling.remove();
+        }
+        break;
+      case "deletecard":
+        ActiveCard = e.target;
+        pmodal.classList.replace("hide-modal", "show-modal");
+        break;
+      case "collapse":
+        e.target.classList.toggle("flip");
+        e.target
+          .closest(".permissions-container")
+          .classList.toggle("permission-collapse");
+        break;
     }
   });
 
-  $("body").on("click", "[data-addrole]", function (e) {
-    ActiveRow = e;
-    document
-      .querySelectorAll("#roles-datatable input[type='checkbox']")
-      .forEach((x) => {
-        x.checked = false;
-      });
-    modal.classList.replace("hide-modal", "show-modal");
+  document.querySelector("body").addEventListener("dragstart", function (e) {
+    if (e.target.dataset.setaction == "draggable")
+      e.target.classList.add("dragging");
   });
 
-  $("body").on("click", "[data-removegroup]", function (e) {
-    let selectedElement = e.target.closest(".line-text");
-    let nextElement = selectedElement.nextElementSibling;
-    selectedElement.remove();
-    nextElement.remove();
+  document.querySelector("body").addEventListener("dragend", function (e) {
+    if (e.target.dataset.setaction == "draggable")
+      e.target.classList.remove("dragging");
   });
 }
 
@@ -195,7 +199,7 @@ function setSelectedRoles() {
       li.appendChild(document.createTextNode(selectedElements[i].value));
       li.insertAdjacentHTML(
         "beforeend",
-        "<i data-deleterole class='fa fa-times' aria-hidden='true'></i>"
+        "<i data-setaction='deleterole' class='fa fa-times' aria-hidden='true'></i>"
       );
       let selectedcount = selected.querySelectorAll(".pill-holder");
       if (selectedcount.length > 0)
